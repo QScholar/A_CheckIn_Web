@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>用户打卡详情</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h2>{{ user.name }}（{{ user.username }}）的打卡记录</h2>
+<p>共计打卡 <strong>{{ total }}</strong> 次</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>日期</th>
+            <th>内容预览</th>
+            <th>查看全文</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in records %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ record.date }}</td>
+            <td>{{ record.preview }}...</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+<a href="{{ url_for('user_checkin_records', username=user.username, export='csv') }}">导出 CSV</a>
+
+<a class="back-link" href="{{ url_for('list_users') }}">← 返回用户列表</a>
+
+</body>
+</html>

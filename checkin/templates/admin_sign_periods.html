@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>打卡记录（按时间段）</title>
+</head>
+<body>
+    <h2>查看时间段打卡记录</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>赛段名称</th>
+                <th>赛段时间</th>
+                <th>查看详情</th>
+                <th>管理休息日</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for period in periods %}
+            <tr>
+                <td>{{ period.name }}</td>
+                <td>{{ period.start_date }} - {{ period.end_date }}</td>
+                <td><a href="{{ url_for('records_by_period', period_id=period.id) }}">详情</a></td>
+                <td><a href="{{ url_for('manage_exceptions',period_id=period.id) }}">管理</a></p></td>
+            </tr>
+                
+                    
+                    
+                
+
+
+        {% endfor %}
+
+        </tbody>
+
+
+
+
+    </table>
+
+        
+
+    <a href="{{ url_for('dashboard') }}">返回首页</a>
+</body>
+</html>

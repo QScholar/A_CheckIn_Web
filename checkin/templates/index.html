@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>首页</title>   
+</head>
+<body>
+  <h1>欢迎使用图管会打卡网站</h1>
+  <p>本次打卡书籍是：</p>
+  <p>《学会提问，驾驭AI：提示词从入门到精通》</p>
+  <img src="/static/book2.jpg" alt="图片">
+  <p font-size="20px">第一次使用请注册账号</p>
+  <div style="display: flex; gap: 10px;justify-content: center;">
+    <button type="button" onclick="window.location.href='{{ url_for('register') }}' ">注册</button>
+    <button type="button" onclick="window.location.href='{{ url_for('login' )}}' ">登录</button>
+  </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+</body>
+</html>

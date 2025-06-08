@@ -1,0 +1,30 @@
+<!-- templates/admin_add_sign_period.html -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>新增打卡时间段</title>
+</head>
+<body>
+    <h1>新增打卡时间段</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name(size=30) }}
+        </p>
+        <p>
+            {{ form.start_date.label }}<br>
+            {{ form.start_date() }}
+        </p>
+        <p>
+            {{ form.end_date.label }}<br>
+            {{ form.end_date() }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <p><a href="{{ url_for('list_sign_periods') }}">返回打卡时间段列表</a></p>
+    <p><a href="{{ url_for('dashboard') }}">返回首页</a></p>
+</body>
+</html>

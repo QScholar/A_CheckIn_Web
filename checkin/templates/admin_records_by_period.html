@@ -1,0 +1,59 @@
+<!-- templates/admin_records_by_period.html -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>打卡记录 - 时间段 {{ period.name }}</title>
+</head>
+<body>
+    <h1>打卡记录</h1>
+    <p>时间段：{{ period.name }} （{{ period.start_date }} 至 {{ period.end_date }}）</p>
+
+    {% if records %}
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>打卡次数</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for user, sign_count in records %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ sign_count }}</td>
+
+                </tr>
+                
+              {% endfor %}
+            
+            </tbody>
+              
+        </table>
+    {% else %}
+        <p>该时间段暂无打卡记录。</p>
+    {% endif %}
+</table>
+<div class="pagination">
+  {% if pagination.has_prev %}
+    <a href="{{ url_for('records_by_period', page=1) }}">首页</a>
+    <a href="{{ url_for('records_by_period', page=pagination.prev_num) }}">上一页</a>
+  {% endif %}
+
+  <span>第 {{ pagination.page }} 页，共 {{ pagination.pages }} 页</span>
+
+  {% if pagination.has_next %}
+    <a href="{{ url_for('records_by_period', page=pagination.next_num) }}">下一页</a>
+    <p>{{ pagination.has_next}} </p>
+    <a href="{{ url_for('records_by_period', page=pagination.pages) }}">尾页</a>
+  {% endif %}
+</div>
+    <a href="{{ url_for('records_by_period', period_id=period.id, export='csv') }}">导出 CSV</a>
+    
+    <p><a href="{{ url_for('list_sign_periods') }}">返回打卡时间段列表</a></p>
+</body>
+</html>

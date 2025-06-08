@@ -1,0 +1,68 @@
+<!-- templates/check_in.html -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>每日打卡</title>
+</head>
+<body>
+  <h2>每日打卡</h2>
+    <h3>你好，{{ name }}</h3>
+    <div>
+      <p>总计打卡次数：<strong>{{ count }}</strong></p>
+    </div>
+  <p>请在下方输入完整的打卡内容，不少于100字。</p>
+  <p>如果少于100字页面不会保存。</p>
+  
+  <!-- 显示当前打卡时间段名称 -->
+  <div>
+    {% if current_period %}
+      <p><strong>当前打卡赛段：</strong> {{ current_period.name }} （{{ current_period.start_date.strftime('%Y-%m-%d') }} 至 {{ current_period.end_date.strftime('%Y-%m-%d') }}）</p>
+    {% else %}
+      <p style="color: #888;">当前不处于打卡时间段</p>
+    {% endif %}
+  </div>
+  <p style="color: red;">{{ message }}</p>
+  <!-- 当日打卡表单 -->
+<form method="post">
+    <label for="contents"></label>
+    <textarea name="contents" rows="10" cols="30" required></textarea>
+    <br>
+    <div style="display: flex; gap: 10px;justify-content: center;">
+        <button type="submit">提交打卡</button>
+        <button type="button" onclick="window.location.href='{{ url_for('dashboard') }}'">返回主页</button>
+    </div>
+</form>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}" style="color: red;">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+  <!-- 历史打卡记录统计 -->
+
+
+  <hr>
+  <h2>本赛段打卡情况</h2>
+    <!-- 历史签到记录展示 -->
+    {% if records %}
+      <!-- <p>本次打卡记录:</p> -->
+        {% for record in records %}
+          <p style="font-size: 16px;line-height:16px">
+            {{ record.date }} 已打卡
+          </p>
+        {% endfor %}
+
+    {% elif name %}
+      <p>暂无签到记录</p>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!-- templates/admin_manage_exceptions.html -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>管理休息日 - {{ period.name }}</title>
+</head>
+<body>
+    <h1>管理休息日</h1>
+    <p>时间段：{{ period.name }} （{{ period.start_date.strftime('%Y-%m-%d') }} 至 {{ period.end_date.strftime('%Y-%m-%d') }}）</p>
+
+    <h2>添加新的休息日</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.exception_date.label }}<br>
+            {{ form.exception_date() }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+    <h2>已有休息日</h2>
+    {% if exceptions %}
+  
+            {% for ex in exceptions %}
+                <p>{{ ex.exception_date.strftime('%Y-%m-%d') }}</p>
+                
+            {% endfor %}
+    {% else %}
+        <p>暂无休息日。</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('list_sign_periods') }}">返回打卡时间段列表</a></p>
+</body>
+</html>

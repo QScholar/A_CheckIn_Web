@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>用户列表</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+</head>
+<body>
+    <h1>用户列表</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>昵称</th>
+                <th>姓名</th>
+                <th>学院</th>
+                <th>QQ</th>
+                <th>删除</th>
+                <th>打卡次数</th>
+                <th>打卡详情</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>
+                    {{ user.name }}
+                    <a href="{{ url_for('edit_user_field', user_id=user.id, field='Name') }}">编辑</a>
+                </td>
+                <td>
+                    {{ user.Departments }}
+                    <a href="{{ url_for('edit_user_field', user_id=user.id, field='Dep') }}">编辑</a>
+                </td>
+                <td>
+                    {{ user.QQ }}
+                    <a href="{{ url_for('edit_user_field', user_id=user.id, field='QQ') }}">编辑</a>
+                </td>
+                <td>
+                    <form action="{{ url_for('delete_user', user_id=user.id) }}" method="post" style="display:inline;" onsubmit="return confirm('确定删除该用户？');">
+                        <button type="submit">删除</button>
+                    </form>
+                </td>
+                <td> {{ checkin_counts.get(user.username, 0) }} </td>
+                
+                <td><a href="{{ url_for('user_checkin_records', username=user.username) }}">打卡详情</a>
+                    
+                </td>
+            </tr>
+            
+            {% endfor %}
+        </tbody>
+    </table>
+      <div class="pagination">
+        {% if pagination.has_prev %}
+          <a href="{{ url_for('list_users', page=1) }}">首页</a>
+          <a href="{{ url_for('list_users', page=pagination.prev_num) }}">上一页</a>
+        {% endif %}
+      
+        <span>第 {{ pagination.page }} 页，共 {{ pagination.pages }} 页</span>
+      
+        {% if pagination.has_next %}
+          <a href="{{ url_for('list_users', page=pagination.next_num) }}">下一页</a>
+          <p>{{ pagination.has_next }} </p>
+          <a href="{{ url_for('list_users', page=pagination.pages) }}">尾页</a>
+        {% endif %}
+      </div>
+      <a href="{{ url_for('list_users', export='csv') }}">导出全部用户 CSV</a>
+
+    <p><a href="{{ url_for('dashboard') }}">返回首页</a></p>
+</body>
+</html>

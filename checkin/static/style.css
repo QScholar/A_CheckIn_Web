@@ -1,0 +1,157 @@
+/* 基本样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin-top: 50px;
+}
+
+button {
+    box-shadow: 0px 2px #a6a6a6;
+    padding: 8px 12px;
+    background-color: lightgrey; /* 背景 */
+    color: #222; /* 文字颜色 */
+    text-shadow: 1px 1px #acacac;
+    border: none;
+    border-radius: 8px; /* 圆角 */
+    cursor: pointer; /* 鼠标悬停时显示手型 */
+    font-size: 16px;
+}
+
+button:hover {
+    box-shadow: none;
+    text-shadow: none;
+    background-color: rgb(159, 159, 159); /* 更深的背景色 */
+}
+
+/* 标题和段落样式 */
+h1, h2, h3, h4 {
+    color: #333;
+}
+
+p {
+    font-size: 16px;
+}
+
+textarea{
+    font-size: 16px;
+}
+
+/* 响应式设计 */
+
+/* 小屏幕（手机，最大宽度 600px） */
+@media (max-width: 600px) {
+    body {
+
+        margin-top: 20px; /* 减少顶部间距 */
+    }
+    
+    button {
+        padding: 10px 15px; /* 增大按钮内边距，便于触摸 */
+        font-size: 14px; /* 减小字体 */
+    }
+    
+    h1 {
+        font-size: 32px; /* 调整标题大小 */
+    }
+    
+    h2 {
+        font-size: 20px;
+    }
+    
+    h3 {
+        font-size: 18px;
+    }
+    
+    h4 {
+        font-size: 16px;
+    }
+    li{
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 18px; /* 减小段落字体 */
+    }
+}
+
+/* 中等屏幕（平板，宽度 601px 至 1024px） */
+@media (min-width: 601px) and (max-width: 1024px) {
+    body {
+        margin-top: 30px; /* 中等顶部间距 */
+    }
+    
+    .custom-button, button {
+        padding: 12px 18px; /* 稍大内边距 */
+        font-size: 16px; /* 中等字体 */
+    }
+    
+    h1 {
+        font-size: 28px;
+    }
+    
+    h2 {
+        font-size: 24px;
+    }
+    
+    h3 {
+        font-size: 20px;
+    }
+    
+    h4 {
+        font-size: 18px;
+    }
+    
+    p {
+        font-size: 16px;
+    }
+}
+
+/* 大屏幕（桌面，宽度大于 1024px） */
+@media (min-width: 1025px) {
+    body {
+        margin-top: 50px; /* 保持原始间距 */
+    }
+    
+    .custom-button, button {
+        padding: 8px 12px; /* 原始内边距 */
+        font-size: 16px; /* 原始字体 */
+    }
+    
+    h1 {
+        font-size: 32px; /* 增大标题 */
+    }
+    
+    h2 {
+        font-size: 28px;
+    }
+    
+    h3 {
+        font-size: 24px;
+    }
+    
+    h4 {
+        font-size: 20px;
+    }
+    textarea{
+        font-size: 18px;
+    }
+    
+    p {
+        font-size: 18px; /* 稍大段落字体 */
+    }
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
